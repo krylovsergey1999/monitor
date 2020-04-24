@@ -1,4 +1,4 @@
-package ru.spbu.entities.entity;
+package ru.spbu.entities.forum;
 
 import ru.spbu.entities.BaseEntity;
 

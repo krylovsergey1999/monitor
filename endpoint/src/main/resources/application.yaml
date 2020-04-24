@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost/monitor
+    username: postgres
+    password: 1208
+  jpa:
+    generate-ddl: true
+    show-sql: false
