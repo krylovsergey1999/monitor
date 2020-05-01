@@ -4,15 +4,21 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import ru.spbu.domain.dto.CommentDTO;
+import ru.spbu.domain.dto.NoteDTO;
+import ru.spbu.domain.repository.NoteRepository;
 import ru.spbu.entities.forum.Comment;
+import ru.spbu.entities.forum.Note;
 
-@Mapper(componentModel = "spring")
+import java.util.List;
+
+
+@Mapper(componentModel = "spring", uses = {NoteRepository.class})
 public interface CommentMapper {
     @Mappings({
             @Mapping(target = "id", source = "entity.id"),
             @Mapping(target = "commentText", source = "entity.commentText"),
             @Mapping(target = "commentTime", source = "entity.commentTime"),
-            //@Mapping(target = "noteId", source = "entity.note.id")
+            @Mapping(target = "noteId", source = "entity.note.id")
     })
     CommentDTO commentToCommentDTO(Comment entity);
 
@@ -20,7 +26,12 @@ public interface CommentMapper {
             @Mapping(target = "id", source = "dto.id"),
             @Mapping(target = "commentText", source = "dto.commentText"),
             @Mapping(target = "commentTime", source = "dto.commentTime"),
-            //@Mapping(target = "note", source = "dto.noteId", qualifiedBy = {EnglishToGerman.class, MovieMapper.class})
+            @Mapping(target = "note", source = "dto.noteId")
     })
     Comment commentDTOtoComment(CommentDTO dto);
+
+    List<CommentDTO> listCommentToCommentDTO(List<Comment> entity);
+
+    List<Comment> listCommentDTOToComment(List<CommentDTO> entity);
+
 }

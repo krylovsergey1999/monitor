@@ -6,6 +6,7 @@ package ru.spbu.domain.exception;
 public interface BusinessExceptionReason {
     /**
      * Код ошибки
+     *
      * @return Код ошибки
      */
     String getCode();
@@ -13,6 +14,7 @@ public interface BusinessExceptionReason {
     /**
      * Паттерн для формирования текста ошибки.
      * Для подстановки в текст значения параметра необходимо в нужном месте паттерна установить '%s'
+     *
      * @return паттерн для формирования сообщения ошибки
      */
     String getMessagePattern();

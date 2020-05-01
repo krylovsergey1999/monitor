@@ -25,9 +25,10 @@ public class ProfiledAspect {
     private final String tabs = " ".repeat(5);
 
     @Pointcut("@annotation(ru.spbu.system.annotation.Profiled)")
-    public void profiled() { }
+    public void profiled() {
+    }
 
-    @AfterThrowing(pointcut = "profiled()",throwing = "e")
+    @AfterThrowing(pointcut = "profiled()", throwing = "e")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
         log.error("Exception in {}.{}() with cause = {}", joinPoint.getSignature().getDeclaringTypeName(),
                 joinPoint.getSignature().getName(), e.getCause() != null ? e.getCause() : "NULL");

@@ -1,7 +1,9 @@
 package ru.spbu.entities.forum;
 
+import org.springframework.lang.NonNull;
 import ru.spbu.entities.BaseEntity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -12,45 +14,46 @@ import java.util.List;
 @Entity
 @Table(name = "note")
 public class Note extends BaseEntity {
+    @NonNull
     private String title;
+    @NonNull
     private String text;
+
     private LocalDateTime commentTime;
 
-    // orphanRemoval = true - удалит все комментарии без Note
-    @OneToMany(mappedBy = "note", orphanRemoval = true)
-    private List<Comment> items = new ArrayList<Comment>();
+    @NonNull
+    @OneToMany(mappedBy = "note", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    private List<Comment> comments = new ArrayList<Comment>();
 
     // Constructors
+
     public Note() {
     }
 
-    public Note(Long id, String title, String text, LocalDateTime commentTime, List<Comment> items) {
-        super(id);
+    public Note(@NonNull String title, @NonNull String text, LocalDateTime commentTime, @NonNull List<Comment> comments) {
         this.title = title;
         this.text = text;
         this.commentTime = commentTime;
-        this.items = items;
-    }
-
-    public void addComment(Comment comment) {
-        comment.setNote(this);
-        this.items.add(comment);
+        this.comments = comments;
     }
 
     // setter and getter
+
+    @NonNull
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(@NonNull String title) {
         this.title = title;
     }
 
+    @NonNull
     public String getText() {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(@NonNull String text) {
         this.text = text;
     }
 
@@ -62,11 +65,23 @@ public class Note extends BaseEntity {
         this.commentTime = commentTime;
     }
 
-    public List<Comment> getItems() {
-        return items;
+    @NonNull
+    public List<Comment> getComments() {
+        return comments;
     }
 
-    public void setItems(List<Comment> items) {
-        this.items = items;
+    public void setComments(@NonNull List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    @Override
+    public String toString() {
+        return "Note{" +
+                "title='" + title + '\'' +
+                ", text='" + text + '\'' +
+                ", commentTime=" + commentTime +
+                ", comments=" + comments +
+                ", id=" + id +
+                '}';
     }
 }

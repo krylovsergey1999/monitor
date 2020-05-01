@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Реализации алгоритмов приложения.
+ *
  * @author Krylov Sergey
  */
 @Service

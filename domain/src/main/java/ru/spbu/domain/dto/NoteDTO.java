@@ -17,6 +17,5 @@ public class NoteDTO extends BaseDTO implements Serializable {
     private String title;
     private String text;
     private LocalDateTime commentTime;
-    // Лист id comments
-    private List<CommentDTO> items;
+    private List<CommentDTO> comments;
 }
