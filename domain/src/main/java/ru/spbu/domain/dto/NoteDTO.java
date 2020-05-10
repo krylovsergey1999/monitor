@@ -16,6 +16,5 @@ import java.util.List;
 public class NoteDTO extends BaseDTO implements Serializable {
     private String title;
     private String text;
-    private LocalDateTime commentTime;
     private List<CommentDTO> comments;
 }

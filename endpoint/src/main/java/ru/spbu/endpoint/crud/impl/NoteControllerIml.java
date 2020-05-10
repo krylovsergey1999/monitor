@@ -40,7 +40,8 @@ public class NoteControllerIml implements NoteController {
 
     @Override
     public ResponseEntity<NoteDTO> update(NoteDTO updatedInstanceRequest, Long id) {
-        return null;
+        NoteDTO noteDTO = noteService.update(updatedInstanceRequest, id);
+        return ResponseEntity.ok(noteDTO);
     }
 
     @Override

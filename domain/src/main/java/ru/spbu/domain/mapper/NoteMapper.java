@@ -14,7 +14,6 @@ public interface NoteMapper {
             @Mapping(target = "id", source = "entity.id"),
             @Mapping(target = "title", source = "entity.title"),
             @Mapping(target = "text", source = "entity.text"),
-            @Mapping(target = "commentTime", source = "entity.commentTime"),
             @Mapping(target = "comments", source = "entity.comments"),
     })
     NoteDTO noteToNoteDTO(Note entity);
@@ -23,7 +22,6 @@ public interface NoteMapper {
             @Mapping(target = "id", source = "dto.id"),
             @Mapping(target = "title", source = "dto.title"),
             @Mapping(target = "text", source = "dto.text"),
-            @Mapping(target = "commentTime", source = "dto.commentTime"),
             @Mapping(target = "comments", source = "dto.comments"),
     })
     Note noteDTOtoNote(NoteDTO dto);

@@ -24,14 +24,14 @@ public class ProfiledAspect {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final String tabs = " ".repeat(5);
 
-    @Pointcut("@annotation(ru.spbu.system.annotation.Profiled)")
-    public void profiled() {
-    }
+    @Pointcut("@within(ru.spbu.system.annotation.Profiled) || @annotation(ru.spbu.system.annotation.Profiled)")
+    public void profiled() {}
 
     @AfterThrowing(pointcut = "profiled()", throwing = "e")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
-        log.error("Exception in {}.{}() with cause = {}", joinPoint.getSignature().getDeclaringTypeName(),
-                joinPoint.getSignature().getName(), e.getCause() != null ? e.getCause() : "NULL");
+        log.error("Exception in {}.{}()",
+                joinPoint.getSignature().getDeclaringTypeName(),
+                joinPoint.getSignature().getName());
     }
 
     @Around("@within(ru.spbu.system.annotation.Profiled) || @annotation(ru.spbu.system.annotation.Profiled)")

@@ -1,11 +1,13 @@
-package ru.spbu.domain.exception;
+package ru.spbu.service.exception.core;
+
+import org.springframework.http.HttpStatus;
 
 /**
- * Интерфейс для описания причины возникновения бизнес ошибки
+ * Интерфейс для описания причины возникновения бизнес ошибки.
  */
 public interface BusinessExceptionReason {
     /**
-     * Код ошибки
+     * Код ошибки.
      *
      * @return Код ошибки
      */
@@ -18,4 +20,12 @@ public interface BusinessExceptionReason {
      * @return паттерн для формирования сообщения ошибки
      */
     String getMessagePattern();
+
+
+    /**
+     * Возвращает статус ошибки исключения.
+     *
+     * @return статус ошибки
+     */
+    HttpStatus getStatus();
 }

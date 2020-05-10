@@ -1,12 +1,13 @@
 package ru.spbu.service.crud.impl;
 
-import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 import ru.spbu.domain.dto.NoteDTO;
+import ru.spbu.service.exception.core.BusinessException;
 import ru.spbu.domain.mapper.NoteMapper;
 import ru.spbu.domain.repository.NoteRepository;
 import ru.spbu.entities.forum.Note;
 import ru.spbu.service.crud.NoteService;
+import ru.spbu.service.exception.ServiceExceptionReason;
 import ru.spbu.system.annotation.Profiled;
 
 import java.util.List;
@@ -28,14 +29,15 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public NoteDTO create(NoteDTO newInstanceDto) {
         Note note = noteMapper.noteDTOtoNote(newInstanceDto);
-        note = noteRepository.save(note);
+        note = noteRepository.saveAndFlush(note);
         newInstanceDto = noteMapper.noteToNoteDTO(note);
         return newInstanceDto;
     }
 
     @Override
     public NoteDTO getById(Long id) {
-        Note note = noteRepository.getOne(id);
+        Note note = noteRepository.findById(id)
+                .orElseThrow(() -> new BusinessException(ServiceExceptionReason.NOTE_NOT_FOUND, id));
         NoteDTO noteDTO = noteMapper.noteToNoteDTO(note);
         return noteDTO;
     }

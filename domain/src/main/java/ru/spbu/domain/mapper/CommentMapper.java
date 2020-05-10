@@ -12,7 +12,7 @@ import ru.spbu.entities.forum.Note;
 import java.util.List;
 
 
-@Mapper(componentModel = "spring", uses = {NoteRepository.class})
+@Mapper(componentModel = "spring")
 public interface CommentMapper {
     @Mappings({
             @Mapping(target = "id", source = "entity.id"),
@@ -26,7 +26,7 @@ public interface CommentMapper {
             @Mapping(target = "id", source = "dto.id"),
             @Mapping(target = "commentText", source = "dto.commentText"),
             @Mapping(target = "commentTime", source = "dto.commentTime"),
-            @Mapping(target = "note", source = "dto.noteId")
+            @Mapping(target = "note.id", source = "dto.noteId")
     })
     Comment commentDTOtoComment(CommentDTO dto);
 

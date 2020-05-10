@@ -28,21 +28,25 @@ public class CommentControllerImpl implements CommentController {
 
     @Override
     public ResponseEntity<CommentDTO> getById(Long id) {
-        return null;
+        CommentDTO commentDTO = commentService.getById(id);
+        return ResponseEntity.ok(commentDTO);
     }
 
     @Override
     public ResponseEntity<List<CommentDTO>> getAll() {
-        return null;
+        List<CommentDTO> commentsDTO = commentService.getAll();
+        return ResponseEntity.ok(commentsDTO);
     }
 
     @Override
     public ResponseEntity<CommentDTO> update(CommentDTO updatedInstanceRequest, Long id) {
-        return null;
+        CommentDTO commentDTO = commentService.update(updatedInstanceRequest, id);
+        return ResponseEntity.ok(commentDTO);
     }
 
     @Override
     public ResponseEntity<Boolean> delete(Long id) {
-        return null;
+        boolean result = commentService.delete(id);
+        return ResponseEntity.ok(result);
     }
 }
